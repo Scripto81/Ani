@@ -170,7 +170,7 @@ killTab:AddButton({
                 [2] = "carry"
             }
             
-            local remote = ReplicatedStorage:WaitForChild("RideEvents"):WaitForChild("acceptEvent")
+            local remote = game:GetService("ReplicatedStorage"):WaitForChild("RideEvents"):WaitForChild("acceptEvent")
             remote:FireServer(unpack(args))
         else
             print("Could not find player with username: " .. targetName)
@@ -197,7 +197,7 @@ killTab:AddButton({
                 [2] = "carry"
             }
             
-            local remote = ReplicatedStorage:WaitForChild("RideEvents"):WaitForChild("acceptEvent")
+            local remote = game:GetService("ReplicatedStorage"):WaitForChild("RideEvents"):WaitForChild("acceptEvent")
             
             for i = 1, 20 do
                 remote:FireServer(unpack(args))
@@ -341,4 +341,4 @@ end
 
 else
  game:GetService("Players").LocalPlayer:Kick("Do not access to NF Scripts")
-end 
+end
