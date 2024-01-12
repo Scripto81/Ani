@@ -209,6 +209,8 @@ killTab:AddButton({
     end
 })
 
+killTab:AddParagraph("For Mobile !", "This opens a keybaord to hide and unhide the gui")
+
 -- Create a new tab in the window
 local otherTab = Window:MakeTab({
   Name = "Other",
