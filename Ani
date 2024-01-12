@@ -218,14 +218,10 @@ if targetPlayer then
     local attackValue = targetPlayer.otherstats.Attack.Value
 
     -- Assuming killTab is defined elsewhere
-    if killTab then
-        killTab:AddParagraph("Level", "Player: " .. selectedPlayerName .. ", Level: " .. levelValue)
-        killTab:AddParagraph("Kill Count", "Player: " .. selectedPlayerName .. ", Kill Count: " .. killValue)
-        killTab:AddParagraph("Coin Count", "Player: " .. selectedPlayerName .. ", Coin Count: " .. coinValue)
-        killTab:AddParagraph("Attack Count", "Player: " .. selectedPlayerName .. ", Attack Count: " .. attackValue)
-    else
-        -- Handle the case where killTab is not defined
-    end
+    killTab:AddParagraph("Level", "Player: " .. selectedPlayerName .. ", Level: " .. levelValue)
+    killTab:AddParagraph("Kill Count", "Player: " .. selectedPlayerName .. ", Kill Count: " .. killValue)
+    killTab:AddParagraph("Coin Count", "Player: " .. selectedPlayerName .. ", Coin Count: " .. coinValue)
+    killTab:AddParagraph("Attack Count", "Player: " .. selectedPlayerName .. ", Attack Count: " .. attackValue)
 end
 
 -- Create a new tab in the window
