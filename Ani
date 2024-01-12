@@ -134,8 +134,6 @@ local killTab = Window:MakeTab({
   PremiumOnly = false,
 })
 
-killTab:AddParagraph("killTab")
-
 local playerList = {}
 for _, player in ipairs(game.Players:GetPlayers()) do
     table.insert(playerList, player.Name)
