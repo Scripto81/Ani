@@ -170,7 +170,7 @@ killTab:AddButton({
                 [2] = "carry"
             }
             
-            local remote = game:GetService("ReplicatedStorage"):WaitForChild("RideEvents"):WaitForChild("acceptEvent")
+            local remote = ReplicatedStorage:WaitForChild("RideEvents"):WaitForChild("acceptEvent")
             remote:FireServer(unpack(args))
         else
             print("Could not find player with username: " .. targetName)
@@ -197,7 +197,7 @@ killTab:AddButton({
                 [2] = "carry"
             }
             
-            local remote = game:GetService("ReplicatedStorage"):WaitForChild("RideEvents"):WaitForChild("acceptEvent")
+            local remote = ReplicatedStorage:WaitForChild("RideEvents"):WaitForChild("acceptEvent")
             
             for i = 1, 20 do
                 remote:FireServer(unpack(args))
@@ -210,24 +210,16 @@ killTab:AddButton({
 })
 
 local targetPlayer = game.Players:FindFirstChild(selectedPlayerName)
-        if targetPlayer then
-            local levelValue = targetPlayer.leaderstats.Level.Value
-            local killValue = targetPlayer.otherstats.Kill.Value
-            local coinValue = targetPlayer.otherstats.Coin.Value
-            local attackValue = targetPlayer.otherstats.Attack.Value
-            killTab:UpdateParagraph("Level", "Player: " .. selectedPlayerName .. ", Level: " .. levelValue)
-            killTab:UpdateParagraph("Kill Count", "Player: " .. selectedPlayerName .. ", Kill Count: " .. killValue)
-            killTab:UpdateParagraph("Coin Count", "Player: " .. selectedPlayerName .. ", Coin Count: " .. coinValue)
-            killTab:UpdateParagraph("Attack Count", "Player: " .. selectedPlayerName .. ", Attack Count: " .. attackValue)
-        end
-    end    
-})
-
-killTab:AddParagraph("Stats", "This displays the player's stats")
-killTab:AddParagraph("Level", "")
-killTab:AddParagraph("Kill Count", "")
-killTab:AddParagraph("Coin Count", "")
-killTab:AddParagraph("Attack Count", "")
+if targetPlayer then
+    local levelValue = targetPlayer.leaderstats.Level.Value
+    local killValue = targetPlayer.otherstats.Kill.Value
+    local coinValue = targetPlayer.otherstats.Coin.Value
+    local attackValue = targetPlayer.otherstats.Attack.Value
+    killTab:UpdateParagraph("Level", "Player: " .. selectedPlayerName .. ", Level: " .. levelValue)
+    killTab:UpdateParagraph("Kill Count", "Player: " .. selectedPlayerName .. ", Kill Count: " .. killValue)
+    killTab:UpdateParagraph("Coin Count", "Player: " .. selectedPlayerName .. ", Coin Count: " .. coinValue)
+    killTab:UpdateParagraph("Attack Count", "Player: " .. selectedPlayerName .. ", Attack Count: " .. attackValue)
+end
 
 -- Create a new tab in the window
 local otherTab = Window:MakeTab({
