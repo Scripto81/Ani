@@ -210,17 +210,23 @@ killTab:AddButton({
 })
 
 local targetPlayer = game.Players:FindFirstChild(selectedPlayerName)
+
 if targetPlayer then
     local levelValue = targetPlayer.leaderstats.Level.Value
     local killValue = targetPlayer.otherstats.Kill.Value
     local coinValue = targetPlayer.otherstats.Coin.Value
     local attackValue = targetPlayer.otherstats.Attack.Value
-    killTab:AddParagraph("Level", "Player: " .. selectedPlayerName .. ", Level: " .. levelValue)
-    killTab:AddParagraph("Kill Count", "Player: " .. selectedPlayerName .. ", Kill Count: " .. killValue)
-    killTab:AddParagraph("Coin Count", "Player: " .. selectedPlayerName .. ", Coin Count: " .. coinValue)
-    killTab:AddParagraph("Attack Count", "Player: " .. selectedPlayerName .. ", Attack Count: " .. attackValue)
+
+    -- Assuming killTab is defined elsewhere
+    if killTab then
+        killTab:AddParagraph("Level", "Player: " .. selectedPlayerName .. ", Level: " .. levelValue)
+        killTab:AddParagraph("Kill Count", "Player: " .. selectedPlayerName .. ", Kill Count: " .. killValue)
+        killTab:AddParagraph("Coin Count", "Player: " .. selectedPlayerName .. ", Coin Count: " .. coinValue)
+        killTab:AddParagraph("Attack Count", "Player: " .. selectedPlayerName .. ", Attack Count: " .. attackValue)
+    else
+        -- Handle the case where killTab is not defined
+    end
 end
-}) -- Closing parentheses added here
 
 -- Create a new tab in the window
 local otherTab = Window:MakeTab({
