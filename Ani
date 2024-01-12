@@ -215,11 +215,12 @@ if targetPlayer then
     local killValue = targetPlayer.otherstats.Kill.Value
     local coinValue = targetPlayer.otherstats.Coin.Value
     local attackValue = targetPlayer.otherstats.Attack.Value
-    killTab:UpdateParagraph("Level", "Player: " .. selectedPlayerName .. ", Level: " .. levelValue)
-    killTab:UpdateParagraph("Kill Count", "Player: " .. selectedPlayerName .. ", Kill Count: " .. killValue)
-    killTab:UpdateParagraph("Coin Count", "Player: " .. selectedPlayerName .. ", Coin Count: " .. coinValue)
-    killTab:UpdateParagraph("Attack Count", "Player: " .. selectedPlayerName .. ", Attack Count: " .. attackValue)
+    killTab:AddParagraph("Level", "Player: " .. selectedPlayerName .. ", Level: " .. levelValue)
+    killTab:AddParagraph("Kill Count", "Player: " .. selectedPlayerName .. ", Kill Count: " .. killValue)
+    killTab:AddParagraph("Coin Count", "Player: " .. selectedPlayerName .. ", Coin Count: " .. coinValue)
+    killTab:AddParagraph("Attack Count", "Player: " .. selectedPlayerName .. ", Attack Count: " .. attackValue)
 end
+}) -- Closing parentheses added here
 
 -- Create a new tab in the window
 local otherTab = Window:MakeTab({
