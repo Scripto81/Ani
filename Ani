@@ -357,6 +357,8 @@ local InfoTab = Window:MakeTab({
   PremiumOnly = false,
 })
 
+local levelParagraph = nil -- Initialize the paragraph variable
+
 InfoTab:AddDropdown({
     Name = "PlayerDropdown",
     Default = "",
@@ -369,8 +371,13 @@ InfoTab:AddDropdown({
         if player then
             local levelValue = getPlayerLevel(player)
             if levelValue then
-                -- Display the selected player's level in a paragraph
-                InfoTab:AddParagraph("Level:", levelValue)
+                if not levelParagraph then
+                    -- If paragraph doesn't exist, create it
+                    levelParagraph = InfoTab:AddParagraph("Level: " .. levelValue)
+                else
+                    -- If paragraph exists, update its text
+                    levelParagraph:SetText("Level: " .. levelValue)
+                end
             else
                 print(selectedPlayerName .. " does not have a Level value.")
             end
