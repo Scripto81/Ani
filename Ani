@@ -350,6 +350,8 @@ roleTab:AddButton({
    end,
 })
 
+-- Assuming Window, getPlayerLevel function, and playerList are defined elsewhere
+
 -- Create a new tab in the window
 local InfoTab = Window:MakeTab({
   Name = "Info",
@@ -357,16 +359,17 @@ local InfoTab = Window:MakeTab({
   PremiumOnly = false,
 })
 
--- Variable to keep track of the paragraph element
-local levelParagraph = nil
+-- Create a variable to store the reference to the level paragraph
+local levelParagraph
 
+-- Define the dropdown and its callback function
 InfoTab:AddDropdown({
     Name = "PlayerDropdown",
     Default = "",
     Options = playerList,
     Callback = function(selectedPlayer)
         -- Store the selected player's name
-        selectedPlayerName = selectedPlayer
+        local selectedPlayerName = selectedPlayer
         print("Selected player:", selectedPlayerName)
 
         -- Find the player object based on the selected player's name
@@ -375,13 +378,12 @@ InfoTab:AddDropdown({
             -- Get the level of the selected player
             local levelValue = getPlayerLevel(player)
             if levelValue then
-                -- Remove the previous paragraph if it exists
-                if levelParagraph then
-                    InfoTab:RemoveElement(levelParagraph)
+                -- If paragraph does not exist, create it. Otherwise, update the text.
+                if not levelParagraph then
+                    levelParagraph = InfoTab:AddParagraph("Level:", levelValue)
+                else
+                    levelParagraph:SetText("Level: " .. levelValue)
                 end
-
-                -- Display the selected player's level in a paragraph
-                levelParagraph = InfoTab:AddParagraph("Level:", levelValue)
             else
                 print(selectedPlayerName .. " does not have a Level value.")
             end
