@@ -235,7 +235,16 @@ killTab:AddButton({
             local player = game.Players.LocalPlayer
             local character = player.Character or player.CharacterAdded:Wait()
             local humanoid = character:WaitForChild("Humanoid")
-            humanoid.Health = 0
+            humanoid.Health = 1
+
+            -- New code to execute after setting the health to 1
+            local newArgs = {
+                [1] = game:GetService("Players"):WaitForChild("ItsJustMeFriendly1").Character.Humanoid,
+                [2] = 2
+            }
+
+            game:GetService("ReplicatedStorage"):WaitForChild("jdskhfsIIIllliiIIIdchgdIiIIIlIlIli"):FireServer(unpack(newArgs))
+
         else
             print("Could not find player with username: " .. targetPlayerName)
         end
