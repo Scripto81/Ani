@@ -351,6 +351,37 @@ roleTab:AddButton({
 })
 
 -- Create a new tab in the window
+local InfoTab = Window:MakeTab({
+  Name = "autofarm",
+  Icon = "rbxassetid://123456789",
+  PremiumOnly = false,
+})
+
+InfoTab:AddDropdown({
+    Name = "PlayerDropdown",
+    Default = "",
+    Options = playerList,
+    Callback = function(selectedPlayer)
+        selectedPlayerName = selectedPlayer
+        print("Selected player:", selectedPlayerName)
+
+        local player = game.Players:FindFirstChild(selectedPlayerName)
+        if player then
+            local levelValue = getPlayerLevel(player)
+            if levelValue then
+                -- Display the selected player's level in a paragraph
+                killTab:AddParagraph("Level:", levelValue)
+            else
+                print(selectedPlayerName .. " does not have a Level value.")
+            end
+        else
+            print("Player " .. selectedPlayerName .. " not found.")
+        end
+    end    
+})
+
+
+-- Create a new tab in the window
 local creditTab = Window:MakeTab({
   Name = "Credits / help",
   Icon = "rbxassetid://123456789",
