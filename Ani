@@ -352,7 +352,7 @@ roleTab:AddButton({
 
 -- Create a new tab in the window
 local InfoTab = Window:MakeTab({
-  Name = "autofarm",
+  Name = "Info",
   Icon = "rbxassetid://123456789",
   PremiumOnly = false,
 })
@@ -370,7 +370,7 @@ InfoTab:AddDropdown({
             local levelValue = getPlayerLevel(player)
             if levelValue then
                 -- Display the selected player's level in a paragraph
-                killTab:AddParagraph("Level:", levelValue)
+                InfoTab:AddParagraph("Level:", levelValue)
             else
                 print(selectedPlayerName .. " does not have a Level value.")
             end
