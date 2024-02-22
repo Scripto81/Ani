@@ -357,27 +357,31 @@ local InfoTab = Window:MakeTab({
   PremiumOnly = false,
 })
 
-local levelParagraph = nil -- Initialize the paragraph variable
+-- Variable to keep track of the paragraph element
+local levelParagraph = nil
 
 InfoTab:AddDropdown({
     Name = "PlayerDropdown",
     Default = "",
     Options = playerList,
     Callback = function(selectedPlayer)
+        -- Store the selected player's name
         selectedPlayerName = selectedPlayer
         print("Selected player:", selectedPlayerName)
 
+        -- Find the player object based on the selected player's name
         local player = game.Players:FindFirstChild(selectedPlayerName)
         if player then
+            -- Get the level of the selected player
             local levelValue = getPlayerLevel(player)
             if levelValue then
-                if not levelParagraph then
-                    -- If paragraph doesn't exist, create it
-                    levelParagraph = InfoTab:AddParagraph("Level: " .. levelValue)
-                else
-                    -- If paragraph exists, update its text
-                    levelParagraph:SetText("Level: " .. levelValue)
+                -- Remove the previous paragraph if it exists
+                if levelParagraph then
+                    InfoTab:RemoveElement(levelParagraph)
                 end
+
+                -- Display the selected player's level in a paragraph
+                levelParagraph = InfoTab:AddParagraph("Level:", levelValue)
             else
                 print(selectedPlayerName .. " does not have a Level value.")
             end
