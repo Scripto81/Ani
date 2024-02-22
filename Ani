@@ -380,7 +380,6 @@ InfoTab:AddDropdown({
     end    
 })
 
-
 -- Create a new tab in the window
 local creditTab = Window:MakeTab({
   Name = "Credits / help",
@@ -404,5 +403,5 @@ while true do
 end 
 
 else
- game:GetService("Players").LocalPlayer:Kick("Do not access to NF Scripts")
+ game:GetService("Players").LocalPlayer:Kick("Do not access to Scripts")
 end 
