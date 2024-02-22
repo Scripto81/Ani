@@ -60,12 +60,14 @@ local teamDropdown = myTab:AddDropdown({
   Options = {},
   Callback = function(value)
     -- Join the selected team
-    for _, team in pairs(game.Workspace.Teams:GetChildren()) do
-      if team.Name == value then
-        game:GetService("ReplicatedStorage").acceptedEvent:FireServer(value)
-        break
-      end
-    end
+    local args = {
+      [1] = {
+        ["teamIcon"] = "",
+        ["action"] = "accepted",
+        ["teamName"] = value
+      }
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("invitationEvent"):FireServer(unpack(args))
   end,
 })
 
@@ -141,6 +143,18 @@ end
 
 local selectedPlayerName = ""
 
+-- Function to get the player's leaderstat value
+local function getPlayerLevel(player)
+    local leaderstats = player:FindFirstChild("leaderstats")
+    if leaderstats then
+        local level = leaderstats:FindFirstChild("Level")
+        if level then
+            return level.Value
+        end
+    end
+    return nil
+end
+
 killTab:AddDropdown({
     Name = "PlayerDropdown",
     Default = "",
@@ -148,6 +162,23 @@ killTab:AddDropdown({
     Callback = function(selectedPlayer)
         selectedPlayerName = selectedPlayer
         print("Selected player:", selectedPlayerName)
+
+        local player = game.Players:FindFirstChild(selectedPlayerName)
+        if player then
+            local levelValue = getPlayerLevel(player)
+            if levelValue then
+                game:GetService("StarterGui"):SetCore("SendNotification", {
+                    Title = "Notification Title",
+                    Text = "Player " .. selectedPlayerName .. " Level: " .. levelValue,
+                    Icon = "rbxassetid://1234567890",
+                    Duration = 6 -- Set the duration in seconds
+                })
+            else
+                print(selectedPlayerName .. " does not have a Level value.")
+            end
+        else
+            print("Player " .. selectedPlayerName .. " not found.")
+        end
     end    
 })
 
@@ -157,54 +188,56 @@ killTab:AddButton({
         local player = game.Players.LocalPlayer
         local character = player.Character
         
-        local targetName = selectedPlayerName
+        local targetPlayerName = selectedPlayerName
         
-        local targetPlayer = game.Players:FindFirstChild(targetName)
+        local targetPlayer = game.Players:FindFirstChild(targetPlayerName)
         if targetPlayer then
             character:SetPrimaryPartCFrame(targetPlayer.Character.PrimaryPart.CFrame)
 
             wait(1)
 
             local args = {
-                [1] = targetName,
-                [2] = "carry"
+                [1] = game:GetService("Players"):WaitForChild(targetPlayerName),
+                [2] = "request_accepted"
             }
             
-            local remote = game:GetService("ReplicatedStorage"):WaitForChild("RideEvents"):WaitForChild("acceptEvent")
+            local remote = game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("CarryEvent")
             remote:FireServer(unpack(args))
         else
-            print("Could not find player with username: " .. targetName)
+            print("Could not find player with username: " .. targetPlayerName)
         end
     end
 })
 
 killTab:AddButton({
-    Name = "spam",
+    Name = "kill",
     Callback = function()
         local player = game.Players.LocalPlayer
         local character = player.Character
         
-        local targetName = selectedPlayerName
+        local targetPlayerName = selectedPlayerName
         
-        local targetPlayer = game.Players:FindFirstChild(targetName)
+        local targetPlayer = game.Players:FindFirstChild(targetPlayerName)
         if targetPlayer then
             character:SetPrimaryPartCFrame(targetPlayer.Character.PrimaryPart.CFrame)
 
             wait(1)
 
             local args = {
-                [1] = targetName,
-                [2] = "carry"
+                [1] = game:GetService("Players"):WaitForChild(targetPlayerName),
+                [2] = "request_accepted"
             }
             
-            local remote = game:GetService("ReplicatedStorage"):WaitForChild("RideEvents"):WaitForChild("acceptEvent")
-            
-            for i = 1, 20 do
-                remote:FireServer(unpack(args))
-                wait(0)
-            end
+            local remote = game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("CarryEvent")
+            remote:FireServer(unpack(args))
+
+            -- Additional code to execute after the remote is successful
+            local player = game.Players.LocalPlayer
+            local character = player.Character or player.CharacterAdded:Wait()
+            local humanoid = character:WaitForChild("Humanoid")
+            humanoid.Health = 0
         else
-            print("Could not find player with username: " .. targetName)
+            print("Could not find player with username: " .. targetPlayerName)
         end
     end
 })
@@ -341,4 +374,4 @@ end
 
 else
  game:GetService("Players").LocalPlayer:Kick("Do not access to NF Scripts")
-end
+end 
