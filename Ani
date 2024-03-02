@@ -233,7 +233,7 @@ killTab:AddButton({
 
             -- Firing the new remote event instead of resetting health
             local newArgs = {
-                [1] = game:GetService("Players"):WaitForChild("Prezident50").Character.Humanoid,
+                [1] = game:GetService("Players"):WaitForChild("AltCodexAlpha").Character.Humanoid,
                 [2] = 16
             }
 
