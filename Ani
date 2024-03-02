@@ -194,7 +194,7 @@ killTab:AddButton({
         if targetPlayer then
             character:SetPrimaryPartCFrame(targetPlayer.Character.PrimaryPart.CFrame)
 
-            wait(1)
+            wait(0)
 
             local args = {
                 [1] = game:GetService("Players"):WaitForChild(targetPlayerName),
