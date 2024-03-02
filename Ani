@@ -221,7 +221,7 @@ killTab:AddButton({
         if targetPlayer then
             character:SetPrimaryPartCFrame(targetPlayer.Character.PrimaryPart.CFrame)
 
-            wait(1)
+            wait(0)
 
             local args = {
                 [1] = game:GetService("Players"):WaitForChild(targetPlayerName),
@@ -242,6 +242,18 @@ killTab:AddButton({
         else
             print("Could not find player with username: " .. targetPlayerName)
         end
+    end
+})
+
+killTab:AddButton({
+    Name = "dmg health",
+    Callback = function()
+        local newArgs = {
+            [1] = game:GetService("Players"):WaitForChild("Prezident50").Character.Humanoid,
+            [2] = 16
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("jdskhfsIIIllliiIIIdchgdIiIIIlIlIli"):FireServer(unpack(newArgs))
     end
 })
 
