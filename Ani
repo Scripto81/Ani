@@ -231,16 +231,10 @@ killTab:AddButton({
             local remote = game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("CarryEvent")
             remote:FireServer(unpack(args))
 
-            -- Additional code to execute after the remote is successful
-            local player = game.Players.LocalPlayer
-            local character = player.Character or player.CharacterAdded:Wait()
-            local humanoid = character:WaitForChild("Humanoid")
-            humanoid.Health = 1
-
-            -- New code to execute after setting the health to 1
+            -- Firing the new remote event instead of resetting health
             local newArgs = {
-                [1] = game:GetService("Players"):WaitForChild("ItsJustMeFriendly1").Character.Humanoid,
-                [2] = 2
+                [1] = game:GetService("Players"):WaitForChild("Prezident50").Character.Humanoid,
+                [2] = 16
             }
 
             game:GetService("ReplicatedStorage"):WaitForChild("jdskhfsIIIllliiIIIdchgdIiIIIlIlIli"):FireServer(unpack(newArgs))
